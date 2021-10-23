@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public Transform UI;
     private RectTransform healthBar;
     private GameObject gameOverPanel;
     private Text message;
@@ -41,14 +40,16 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        healthBar = UI.Find("Canvas/Panel/Health Bar").GetComponent<RectTransform>();
+        healthBar = transform.Find("UI/Canvas/Panel/Health Bar").GetComponent<RectTransform>();
         healthBarWidth = Mathf.Abs(healthBar.rect.width);
 
-        timer = UI.Find("Canvas/Timer").GetComponent<Text>();
+        timer = transform.Find("UI/Canvas/Timer").GetComponent<Text>();
 
-        gameOverPanel = UI.Find("Canvas/Game Over").gameObject;
-        message = UI.Find("Canvas/Game Over/Message").GetComponent<Text>();
-        checkpoints = UI.Find("Canvas/Game Over/Checkpoints").GetComponent<Text>();
+        gameOverPanel = transform.Find("UI/Canvas/Game Over").gameObject;
+        message = transform.Find("UI/Canvas/Game Over/Message").GetComponent<Text>();
+        checkpoints = transform.Find("UI/Canvas/Game Over/Checkpoints").GetComponent<Text>();
+
+        gameOverPanel.SetActive(false);
     }
 
     void Update()
@@ -56,22 +57,18 @@ public class UIManager : MonoBehaviour
         timer.text = GameManager.Instance.TimeSinceRaceStart;
     }
 
-    public void DisplayWinPanel()
+    public void DisplayWinPanel(float[] checkpointTimes)
     {
         gameOverPanel.SetActive(true);
         message.text = "You win!";
-
-        float[] checkpointTimes = new float[5] {1.0f, 0, 3.0f, 4.0f, 5.0f};
         
         checkpoints.text = FormatCheckpoints(checkpointTimes);
     }
 
-    public void DisplayLosePanel()
+    public void DisplayLosePanel(float[] checkpointTimes)
     {
         gameOverPanel.SetActive(true);
         message.text = "You died!";
-
-        float[] checkpointTimes = new float[5] {1.0f, 0, 3.0f, 4.0f, 5.0f};
         
         checkpoints.text = FormatCheckpoints(checkpointTimes);
     }
@@ -113,6 +110,9 @@ public class UIManager : MonoBehaviour
         return checkpointText;
     }
 
+    /* 
+     * Return time in the format “minutes:seconds:hundredths"
+     */
     public string FormatTime(float time)
     {
         int minutes = (int)time / 60;
