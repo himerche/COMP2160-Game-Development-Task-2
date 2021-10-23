@@ -9,5 +9,5 @@ public class Health : MonoBehaviour
     [Range(0, 1)]
     public float smokeThreshold = 0.25f;
     public float healthRestoredAtCheckpoint = 0.1f;
-    public float minimumDamage = 0.05f;
+    public float damageMustExceed = 0.05f;
 }

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public Transform[] checkpoints;
+    private float[] checkpointTimes;
+
     private string timeSinceRaceStart;
     public string TimeSinceRaceStart
     {
@@ -40,9 +43,48 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        checkpointTimes = new float[checkpoints.Length];
+    }
+
     void Update()
     {
         timeSinceRaceStart = FormatTime(Time.timeSinceLevelLoad);
+    }
+
+    void OnDrawGizmos()
+    {
+        if(checkpoints.Length > 1)
+        {
+            Gizmos.color = Color.red;
+
+            for(int i = 0; i < checkpoints.Length - 1; i++)
+            {
+                Vector3 c0 = checkpoints[i].position;
+                Vector3 c1 = checkpoints[i + 1].position;
+                
+                Gizmos.DrawLine(c0, c1);
+            }
+        }
+    }
+
+    public void WinGame()
+    {
+        UIManager.Instance.DisplayWinPanel();
+        Time.timeScale = 0;
+    }
+
+    public void LoseGame()
+    {
+        UIManager.Instance.DisplayLosePanel();
+        Time.timeScale = 0;
+    }
+
+    public void RestartGame()
+    {
+        UIManager.Instance.HideGameOverPanel();
+        Time.timeScale = 1;
     }
 
     public void UpdateHealth(float health)
@@ -52,10 +94,10 @@ public class GameManager : MonoBehaviour
 
     public string FormatTime(float time)
     {
-        int minutes = (int)time / 60000;
-        int seconds = (int)time / 1000 - 60 * minutes;
-        int milliseconds = (int)time - minutes * 60000 - 1000 * seconds;
+        int minutes = (int)time / 60;
+        int seconds = (int)time - minutes;
+        float hundredths = (time - minutes - seconds) * 100;
 
-        return string.Format("{0:0}:{1:00}:{2:00}", minutes, seconds, milliseconds);
+        return string.Format("{0:0}:{1:00}:{2:00}", minutes, seconds, hundredths);
     }
 }
