@@ -6,7 +6,7 @@ public class TerrainCollision : MonoBehaviour
 {
     public LayerMask layerMask;
 
-    private PlayerHealth playerhealth;
+    private PlayerHealth playerHealth;
 
     void Start()
     {
@@ -15,9 +15,9 @@ public class TerrainCollision : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if(layerMask.Contains(collision.collider))
+        if(layerMask.Contains(collision.gameObject))
         {
-            playerHealth.Health -= Mathf.Clamp01(collision.relativeVelocity.magnitude / 10);
+            playerHealth.Health -= (int)Mathf.Clamp01(collision.relativeVelocity.magnitude / 10);
         }
     }
 }

@@ -12,15 +12,7 @@ public class PlayerHealth : MonoBehaviour
         }
         set
         {
-            if(value < 0)
-            {
-                value = 0;
-            } else if(value > 100)
-            {
-                value = 100;
-            }
-
-            health = value;
+            health = (int)Mathf.Clamp(value, 0, 100);
         }
     }
 
