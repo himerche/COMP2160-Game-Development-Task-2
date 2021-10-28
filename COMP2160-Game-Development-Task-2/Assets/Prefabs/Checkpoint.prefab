@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7910723995183332306}
   - component: {fileID: 7810480529515027369}
   - component: {fileID: -249165430141824410}
+  - component: {fileID: -5488141871024467923}
   m_Layer: 0
   m_Name: Checkpoint
   m_TagString: Untagged
@@ -91,10 +92,10 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5300683841686810420}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 3
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!108 &-249165430141824410
 Light:
@@ -158,3 +159,17 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &-5488141871024467923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5300683841686810420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 459030e0f8f624044bc59c5c87622a07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthRestoredAtCheckpoint: 10
+  radius: 3
