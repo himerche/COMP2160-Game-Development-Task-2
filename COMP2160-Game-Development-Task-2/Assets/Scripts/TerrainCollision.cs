@@ -5,6 +5,7 @@ using UnityEngine;
 public class TerrainCollision : MonoBehaviour
 {
     public LayerMask layerMask;
+    public int damageMustExceed = 5;
 
     private PlayerHealth playerHealth;
 
@@ -17,7 +18,12 @@ public class TerrainCollision : MonoBehaviour
     {
         if(layerMask.Contains(collision.gameObject))
         {
-            playerHealth.Health -= (int)Mathf.Clamp01(collision.relativeVelocity.magnitude / 10);
+            int damage = (int)Mathf.Clamp01(collision.relativeVelocity.magnitude / 10);
+
+            if(damage > damageMustExceed)
+            {
+                playerHealth.Health -= damage;
+            }
         }
     }
 }

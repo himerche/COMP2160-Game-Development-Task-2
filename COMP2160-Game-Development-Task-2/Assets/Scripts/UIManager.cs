@@ -101,24 +101,12 @@ public class UIManager : MonoBehaviour
             }
             else
             {
-                string time = FormatTime(checkpointTimes[i]);
+                string time = TimeExtensions.FormatTime(checkpointTimes[i]);
                 checkpointText += $"Checkpoint {i + 1}: {time}";
                 checkpointText += "\n";
             }
         }
 
         return checkpointText;
-    }
-
-    /* 
-     * Return time in the format “minutes:seconds:hundredths"
-     */
-    public string FormatTime(float time)
-    {
-        int minutes = (int)time / 60;
-        int seconds = (int)time - minutes;
-        float hundredths = (time - minutes - seconds) * 100;
-
-        return string.Format("{0:0}:{1:00}:{2:00}", minutes, seconds, hundredths);
     }
 }

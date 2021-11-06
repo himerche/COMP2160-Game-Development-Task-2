@@ -18,7 +18,6 @@ public class PlayerHealth : MonoBehaviour
 
     [Range(0, 1)]
     public int smokeThreshold = 25;
-    public int damageMustExceed = 5;
 
     private ParticleSystem smoke;
     private ParticleSystem explosion;
