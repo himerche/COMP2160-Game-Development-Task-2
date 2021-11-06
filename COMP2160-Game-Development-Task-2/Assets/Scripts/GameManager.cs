@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public Transform[] checkpoints;
-    public Light[] checkpointIndicators;
+    private Light[] checkpointIndicators;
     private float[] checkpointTimes;
 
     private int activeCheckpoint = -1;
@@ -19,8 +19,6 @@ public class GameManager : MonoBehaviour
             return timeSinceRaceStart;
         }
     }
-
-    private GameObject player;
 
     static private GameManager instance;
     static public GameManager Instance
